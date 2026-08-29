@@ -69,6 +69,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "node scripts/prepare-spa-fallback.mjs",
     "test": "craco test"
   },
   "browserslist": {
