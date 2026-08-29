@@ -442,7 +442,7 @@ export default function Home() {
           <Reveal delay={0.1} className="flex flex-col justify-between overflow-hidden rounded-card border border-maxek-border bg-maxek-surface lg:col-span-5">
             <div className="group relative flex-1 aspect-square w-full overflow-hidden rounded-t-[inherit] rounded-b-none">
               <img
-                src="/images/global/trivandrum-map.png"
+                src={`${process.env.PUBLIC_URL || ""}/images/global/trivandrum-map.png`}
                 alt="MAXEK Headquarters - Thiruvananthapuram"
                 className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:brightness-105"
               />

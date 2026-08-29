@@ -6,6 +6,7 @@
  *              official asset exists (approved by the client).
  */
 const U = "https://images.unsplash.com";
+const P = process.env.PUBLIC_URL || "";
 const q = (id, w = 1600) =>
   `${U}/${id}?crop=entropy&cs=srgb&fm=jpg&q=82&w=${w}`;
 
@@ -14,8 +15,8 @@ export const OFFICIAL = {
   heroVideo: "/assets/video/maxek-hero.mp4",
   logoLight: "/assets/logos/maxek-logo-dark.webp",
   logoDark: "/assets/logos/maxek-logo-light.webp",
-  careers: "/images/Careers/maxek-careers.png",
-  aboutIntegrated: "/images/about/maxek-about-integrated-hero.png",
+  careers: `${P}/images/Careers/maxek-careers.png`,
+  aboutIntegrated: `${P}/images/about/maxek-about-integrated-hero.png`,
   industriesHero: "/assets/images/industries-hero-new.png",
   projects: {
     industrialPlant: "/assets/projects/industrial-plant-construction-maxek-sm.webp",
