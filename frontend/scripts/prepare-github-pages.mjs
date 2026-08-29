@@ -24,11 +24,7 @@ async function prepareDirectory(directory) {
         .replaceAll('"/assets/', `"${publicPath}/assets/`)
         .replaceAll("'/assets/", `'${publicPath}/assets/`)
         .replaceAll("(/assets/", `(${publicPath}/assets/`)
-        .replaceAll("=/assets/", `=${publicPath}/assets/`)
-        .replaceAll('"/images/', `"${publicPath}/images/`)
-        .replaceAll("'/images/", `'${publicPath}/images/`)
-        .replaceAll("(/images/", `(${publicPath}/images/`)
-        .replaceAll("=/images/", `=${publicPath}/images/`);
+        .replaceAll("=/assets/", `=${publicPath}/assets/`);
 
       if (prepared !== original) await writeFile(filePath, prepared);
     }),
