@@ -12,6 +12,16 @@ export const api = axios.create({
   timeout: 20000,
 });
 
+const requireArray = (data, resource) => {
+  if (Array.isArray(data)) return data;
+  throw new Error(`Invalid ${resource} response`);
+};
+
+const requireObject = (data, resource) => {
+  if (data && typeof data === "object" && !Array.isArray(data)) return data;
+  throw new Error(`Invalid ${resource} response`);
+};
+
 /* Submissions ---------------------------------------------------------- */
 export const submitEnquiry = (payload) =>
   api.post("/enquiry", payload).then((r) => r.data);
@@ -26,7 +36,7 @@ export const submitApplication = (payload) =>
 export const fetchProjects = (vertical) =>
   api
     .get("/projects", { params: vertical && vertical !== "all" ? { vertical } : {} })
-    .then((r) => r.data)
+    .then((r) => requireArray(r.data, "projects"))
     .catch(() =>
       vertical && vertical !== "all"
         ? PROJECTS.filter((project) => project.vertical_slug === vertical)
@@ -36,7 +46,7 @@ export const fetchProjects = (vertical) =>
 export const fetchProject = (slug) =>
   api
     .get(`/projects/${slug}`)
-    .then((r) => r.data)
+    .then((r) => requireObject(r.data, "project"))
     .catch((error) => {
       const project = PROJECTS.find((item) => item.slug === slug);
       if (project) return project;
@@ -46,7 +56,7 @@ export const fetchProject = (slug) =>
 export const fetchArticles = (category) =>
   api
     .get("/articles", { params: category && category !== "All" ? { category } : {} })
-    .then((r) => r.data)
+    .then((r) => requireArray(r.data, "articles"))
     .catch(() =>
       category && category !== "All"
         ? ARTICLES.filter((article) => article.category === category)
@@ -56,7 +66,7 @@ export const fetchArticles = (category) =>
 export const fetchArticle = (slug) =>
   api
     .get(`/articles/${slug}`)
-    .then((r) => r.data)
+    .then((r) => requireObject(r.data, "article"))
     .catch((error) => {
       const article = ARTICLES.find((item) => item.slug === slug);
       if (article) return article;
